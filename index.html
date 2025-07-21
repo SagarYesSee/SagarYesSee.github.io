@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sagar Chintamani - Personal Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Poppins for stylish look, Inter for content, Great Vibes for name -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Custom color variables for a softer, multi-shade palette */
+            --color-primary-start: #FFA07A; /* Light Salmon */
+            --color-primary-end: #FFDAB9;   /* Peach Puff */
+            --color-secondary-start: #87CEEB; /* Sky Blue */
+            --color-secondary-end: #ADD8E6;   /* Light Blue */
+            --color-accent-text: #FFDAB9; /* Peach Puff for main accents */
+            --color-hover-text: #FFA07A; /* Light Salmon on hover */
+            --color-dark-bg: #1A1A1A; /* Slightly lighter dark background */
+            --color-card-bg: rgba(30, 30, 30, 0.8); /* Semi-transparent dark card background */
+            --color-card-hover-bg: rgba(40, 40, 40, 0.9); /* Slightly less transparent on hover */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif; /* Default font for body */
+            background-color: var(--color-dark-bg);
+            color: #e0e0e0; /* Lighter text */
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            padding-top: 6rem; /* Add padding to the top of the body to clear the fixed nav */
+        }
+        @media (min-width: 768px) { /* Adjust for larger screens if nav height changes */
+            body {
+                padding-top: 5rem; /* Slightly less padding on desktop if nav is shorter */
+            }
+        }
+
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif; /* Stylish font for headings */
+        }
+        /* Specific font for the name in hero section */
+        #name-typing {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.2em; /* Adjust relative to h1 */
+            font-weight: 400; /* Great Vibes is typically light */
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .section-heading {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2.5rem;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--color-accent-text);
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 80%;
+            height: 5px;
+            background: linear-gradient(to right, var(--color-primary-start), var(--color-secondary-start));
+            border-radius: 3px;
+        }
+        .card {
+            background-color: var(--color-card-bg);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out, background-color 0.4s ease-in-out;
+            border: 1px solid rgba(255, 255, 255, 0.08); /* Subtle border */
+        }
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.6);
+            background-color: var(--color-card-hover-bg);
+        }
+        .btn-primary {
+            background: linear-gradient(to right, var(--color-primary-start), var(--color-primary-end));
+            color: var(--color-dark-bg); /* Dark text on button */
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-weight: 700;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: flex; /* Use flexbox for icon and text alignment */
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(to right, var(--color-primary-end), var(--color-primary-start)); /* Reverse gradient on hover */
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+        .icon-link {
+            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+            font-size: 2.5rem;
+            color: var(--color-accent-text);
+        }
+        .icon-link:hover {
+            transform: translateY(-5px) rotate(5deg);
+            color: var(--color-hover-text);
+        }
+
+        /* Animation for section fade-in */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero section background animation */
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            opacity: 0.25; /* Slightly more visible for the softer colors */
+        }
+        .hero-background::before,
+        .hero-background::after {
+            content: '';
+            position: absolute;
+            background: var(--color-primary-start);
+            border-radius: 50%;
+            animation: move-bg 25s infinite alternate ease-in-out;
+            filter: blur(100px);
+        }
+        .hero-background::before {
+            width: 350px;
+            height: 350px;
+            top: -80px;
+            left: -80px;
+            animation-delay: 0s;
+        }
+        .hero-background::after {
+            width: 450px;
+            height: 450px;
+            bottom: -120px;
+            right: -120px;
+            background: var(--color-secondary-start);
+            animation-delay: 7s;
+        }
+
+        @keyframes move-bg {
+            0% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(70px, 70px) scale(1.15); }
+            50% { transform: translate(-50px, 120px) scale(0.95); }
+            75% { transform: translate(80px, -30px) scale(1.2); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+
+        /* Typing animation for name */
+        .typing-animation {
+            overflow: hidden;
+            border-right: .15em solid var(--color-primary-start); /* Caret color */
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .08em; /* Slightly reduced letter spacing for script font */
+            animation:
+                typing 3.5s steps(30, end) forwards,
+                blink-caret .75s step-end infinite;
+        }
+
+        /* The typing effect */
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        /* The typewriter caret effect */
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--color-primary-start); }
+        }
+
+        /* Scroll-to-top button */
+        #scrollToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(to right, var(--color-primary-start), var(--color-primary-end));
+            color: var(--color-dark-bg);
+            border: none;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            z-index: 1000;
+        }
+
+        #scrollToTopBtn:hover {
+            background: linear-gradient(to right, var(--color-primary-end), var(--color-primary-start));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Loading spinner */
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid var(--color-primary-start);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Download button animation */
+        .download-animation {
+            animation: download-pulse 0.5s ease-out;
+        }
+
+        @keyframes download-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-gray-950 text-gray-100">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-800 p-4 fixed top-0 left-0 w-full z-50 shadow-lg rounded-b-xl px-6 py-3">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <a href="#" class="text-3xl font-extrabold text-white hover:text-yellow-200 transition-colors duration-300 mb-2 md:mb-0">Sagar Chintamani</a>
+            <div class="flex flex-wrap justify-center md:space-x-6 space-x-3">
+                <a href="#about" class="text-gray-300 hover:text-yellow-200 transition-colors duration-300 font-medium">About</a>
+                <a href="#education" class="text-gray-300 hover:text-yellow-200 transition-colors duration-300 font-medium">Education</a>
+                <a href="#experience" class="text-gray-300 hover:text-yellow-200 transition-colors duration-300 font-medium">Experience</a>
+                <a href="#projects" class="text-gray-300 hover:text-yellow-200 transition-colors duration-300 font-medium">Projects</a>
+                <a href="#skills" class="text-gray-300 hover:text-yellow-200 transition-colors duration-300 font-medium">Skills</a>
+                <a href="#ai-assistant" class="text-gray-300 hover:text-yellow-200 transition-colors duration-300 font-medium">AI Assistant</a>
+                <a href="#contact" class="text-gray-300 hover:text-yellow-200 transition-colors duration-300 font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative h-screen flex items-center justify-center text-center mt-0 pt-0 overflow-hidden">
+        <div class="hero-background"></div>
+        <div class="z-10 flex flex-col items-center">
+            <div class="relative w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden mb-6 border-4 border-yellow-200 shadow-lg animate-fade-in-down">
+                <img src="https://placehold.co/400x400/FFDAB9/1A1A1A?text=Sagar" onerror="this.src='IMG-20240630-WA0001.jpg-04680259-6f07-436a-bfa1-e833d02aa366';" alt="Sagar Chintamani Profile" class="w-full h-full object-contain">
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-4">
+                Hi, I'm <span class="text-yellow-200 typing-animation" id="name-typing"></span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8 animate-fade-in-up delay-200">
+                A passionate Computer Science professional with a focus on Quality Assurance and Technical Content.
+            </p>
+            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 animate-fade-in-up delay-400">
+                <a href="#projects" id="viewWorkBtn" class="btn-primary inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-open mr-2"><path d="M6 14V4a2 2 0 0 1 2-2h4l2 2h4a2 2 0 0 1 2 2v7.5"/><path d="M2 8v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/></svg>
+                    View My Work
+                </a>
+                <a href="Sagar_s_Resume.pdf" download="Sagar_Chintamani_Resume.pdf" id="downloadResumeBtn" class="btn-primary inline-block bg-gray-700 hover:bg-gray-600 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download mr-2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                    Download Resume
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <main class="container mx-auto py-16 px-4">
+
+        <!-- About Me Section -->
+        <section id="about" class="py-16 fade-in-section">
+            <h2 class="section-heading">About Me</h2>
+            <div class="card">
+                <p class="text-lg mb-4">
+                    I am a Bachelor of Computer Science graduate from The Oxford College of Engineering with a CGPA of 8.6.
+                    My professional journey includes roles as a Technical Content Specialist Freelancer at GeeksforGeeks
+                    and a QA Analyst Intern at Robowaves.
+                </p>
+                <p class="text-lg">
+                    I am passionate about ensuring software quality, creating engaging technical content, and continuously
+                    learning new technologies. My skills span across various testing methodologies, defect tracking, SQL, Java,
+                    and automation tools like Selenium. I am a strong communicator, collaborator, and problem-solver.
+                </p>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="py-16 fade-in-section">
+            <h2 class="section-heading">Education</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card">
+                    <h3 class="text-2xl font-semibold text-yellow-200 mb-2">The Oxford College of Engineering</h3>
+                    <p class="text-gray-300">Bachelor's of Computer Science</p>
+                    <p class="text-gray-300">CGPA: 8.6</p>
+                    <p class="text-gray-400 text-sm">2021 - 2025, Bangalore</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-2xl font-semibold text-yellow-200 mb-2">Oxford Patil's PU Science College</h3>
+                    <p class="text-gray-300">Pre-University (PCMB)</p>
+                    <p class="text-gray-300">Percentage: 84.8%</p>
+                    <p class="text-gray-400 text-sm">2019 - 2021, Bijapur</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-16 fade-in-section">
+            <h2 class="section-heading">Experience</h2>
+            <div class="grid gap-8">
+                <div class="card">
+                    <h3 class="text-2xl font-semibold text-yellow-200 mb-2">Technical Content Specialist Freelancer</h3>
+                    <p class="text-gray-300">GeeksforGeeks</p>
+                    <p class="text-gray-400 text-sm">Feb 2024 - Jan 2025, Bangalore</p>
+                    <ul class="list-disc list-inside mt-4 space-y-2 text-lg">
+                        <li>Authored high-quality technical content on Operating Systems, SQL concepts, Databases, AWS, DevOps, and programming.</li>
+                        <li>Collaborated with the GeeksforGeeks team to produce accurate, engaging, and well-structured technical articles.</li>
+                        <li>Contributed to a widely recognized technical knowledge repository supporting developers and tech enthusiasts.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="text-2xl font-semibold text-yellow-200 mb-2">QA Analyst Intern</h3>
+                    <p class="text-gray-300">Robowaves</p>
+                    <p class="text-gray-400 text-sm">Feb 2025 - May 2025, Bangalore</p>
+                    <ul class="list-disc list-inside mt-4 space-y-2 text-lg">
+                        <li>Conducted software testing and quality assurance on live projects, ensuring optimal performance.</li>
+                        <li>Gained expertise in test case creation, Requirements Traceability Matrix (RTM), Script execution, and bug tracking to improve software reliability.</li>
+                        <li>Worked with automation tools and frameworks, enhancing efficiency in testing processes.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-16 fade-in-section">
+            <h2 class="section-heading">Projects</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card">
+                    <h3 class="text-2xl font-semibold text-yellow-200 mb-2">Next-Gen Interview Simulator with Facial Tracking and Answer Insights</h3>
+                    <p class="text-gray-300 mb-4">A platform to enhance interview preparation through personalized simulations and real-time feedback.</p>
+                    <ul class="list-disc list-inside space-y-2 text-lg">
+                        <li>Integrated NLP and video transcription to provide actionable feedback on verbal and non-verbal communication.</li>
+                        <li>Built a secure and scalable backend to support 100+ concurrent users.</li>
+                        <li>Delivered performance analytics via an interactive dashboard, boosting user engagement and readiness.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="text-2xl font-semibold text-yellow-200 mb-2">ShoppersStack Website Testing</h3>
+                    <p class="text-gray-300 mb-4">Tested the e-commerce web application shoppersstack.com during internship at Robowaves Innovations.</p>
+                    <ul class="list-disc list-inside space-y-2 text-lg">
+                        <li>Performed functional, regression, compatibility, and exploratory testing across various browsers and devices.</li>
+                        <li>Created and executed detailed test cases, identified defects, and logged them using Jira.</li>
+                        <li>Automated smoke and regression test cases using Selenium and TestNG; validated APIs through Postman and REST Assured.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Skills Section -->
+        <section id="skills" class="py-16 fade-in-section">
+            <h2 class="section-heading">Technical Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card">
+                    <h4 class="font-semibold text-yellow-200 mb-2">Testing Skills:</h4>
+                    <ul class="list-disc list-inside space-y-1 text-lg">
+                        <li>SDLC, STLC</li>
+                        <li>Smoke testing, Regression Testing</li>
+                        <li>Compatibility Testing, Adhoc Testing, Exploratory Testing</li>
+                        <li>Performance Testing</li>
+                        <li>Test Case Design, Test Data Management, Test Execution</li>
+                        <li>Defect Lifecycle</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4 class="font-semibold text-yellow-200 mb-2">Defect Tracking Tools:</h4>
+                    <ul class="list-disc list-inside space-y-1 text-lg">
+                        <li>Jira, Test Rail, Quality Center</li>
+                        <li>Defect Reporting</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4 class="font-semibold text-yellow-200 mb-2">SQL Skills:</h4>
+                    <ul class="list-disc list-inside space-y-1 text-lg">
+                        <li>SQL Queries, Joins, Subqueries</li>
+                        <li>DDL, DML, DQL, TCL, DCL</li>
+                        <li>Normalization</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4 class="font-semibold text-yellow-200 mb-2">Java Skills:</h4>
+                    <ul class="list-disc list-inside space-y-1 text-lg">
+                        <li>OOPs, Inheritance, Polymorphism</li>
+                        <li>Abstraction, Encapsulation</li>
+                        <li>Collections, Exception Handling</li>
+                        <li>Overloading, Overriding</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4 class="font-semibold text-yellow-200 mb-2">Selenium Skills:</h4>
+                    <ul class="list-disc list-inside space-y-1 text-lg">
+                        <li>Selenium, XPath, Locators, Select Class</li>
+                        <li>Actions Class, Frames, Pop-ups</li>
+                        <li>TestNG, Page Object Model (POM)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4 class="font-semibold text-yellow-200 mb-2">Developer Tools:</h4>
+                    <ul class="list-disc list-inside space-y-1 text-lg">
+                        <li>VS Code, Eclipse, FireFlink</li>
+                        <li>Figma, Adobe XD, GitHub</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4 class="font-semibold text-yellow-200 mb-2">Soft Skills:</h4>
+                    <ul class="list-disc list-inside space-y-1 text-lg">
+                        <li>Communication, Collaboration</li>
+                        <li>Problem-Solving, Leadership</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Assistant Section -->
+        <section id="ai-assistant" class="py-16 fade-in-section">
+            <h2 class="section-heading">Ask Sagar ✨ (AI Assistant)</h2>
+            <div class="card max-w-2xl mx-auto">
+                <p class="text-lg mb-4">
+                    Have a question about my skills, experience, or projects? Ask my AI assistant!
+                    It will answer based on the information provided in my resume.
+                </p>
+                <div class="mb-4">
+                    <textarea id="aiQuestion" class="w-full p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-200 resize-y" rows="3" placeholder="e.g., What are your key testing skills?"></textarea>
+                </div>
+                <button id="askAiBtn" class="btn-primary flex items-center justify-center w-full">
+                    <span id="buttonText">Ask AI</span>
+                    <div id="loadingSpinner" class="spinner ml-2 hidden"></div>
+                </button>
+                <div id="aiResponse" class="mt-6 p-4 rounded-lg bg-gray-700 text-gray-200 border border-gray-600 hidden">
+                    <p class="font-semibold text-yellow-200 mb-2">AI Response:</p>
+                    <p id="aiResponseText"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 fade-in-section text-center">
+            <h2 class="section-heading mx-auto">Contact Me</h2>
+            <div class="card max-w-2xl mx-auto">
+                <p class="text-lg mb-6">
+                    Feel free to reach out to me for collaborations, opportunities, or just to say hello!
+                </p>
+                <div class="flex justify-center space-x-6 mb-6">
+                    <a href="mailto:sagarsccse2025@gmail.com" class="icon-link text-3xl" aria-label="Email">
+                        <!-- Email Icon SVG -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail inline-block"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    </a>
+                    <a href="https://linkedin.com/in/sagar-chintamani/" target="_blank" rel="noopener noreferrer" class="icon-link text-3xl" aria-label="LinkedIn">
+                        <!-- LinkedIn Icon SVG -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin inline-block"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+                    <a href="https://github.com/SagarYesSee" target="_blank" rel="noopener noreferrer" class="icon-link text-3xl" aria-label="GitHub">
+                        <!-- GitHub Icon SVG -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github inline-block"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.44-.78-3.5.25-1.15.25-2.39 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.1-.3 2.3 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                    </a>
+                </div>
+                <p class="text-lg">Phone: +91 7892787905</p>
+                <p class="text-lg">Location: Bangalore, Karnataka</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 p-6 text-center text-gray-400 rounded-t-xl">
+        <p>&copy; 2025 Sagar Chintamani. All rights reserved.</p>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" title="Go to top">↑</button>
+
+    <script>
+        // Resume content for AI assistant
+        const resumeContent = `
+            SAGAR CHINTAMANI
+            7892787905
+            sagarsccse2025@gmail.com
+            Bangalore, Karnataka
+            linkedin.com/in/sagar-chintamani/github.com/SagarYesSee
+
+            Education
+            The Oxford College of Engineering
+            Bachelor's of Computer Science; CGPA: 8.6
+            2021 - 2025, Bangalore
+
+            Oxford Patil's PU Science College
+            Pre-University (PCMB); Percentage: 84.8%
+            2019 - 2021, Bijapur
+
+            Internship Experience
+            GeeksforGeeks
+            Technical Content Specialist Freelancer
+            Feb 2024 - Jan 2025, Bangalore
+            • Authored high-quality technical content on Operating Systems, SQL concepts, Databases, AWS, DevOps, and programming.
+            • Collaborated with the GeeksforGeeks team to produce accurate, engaging, and well-structured technical articles.
+            • Contributed to a widely recognized technical knowledge repository supporting developers and tech enthusiasts.
+
+            Robowaves
+            QA Analyst Intern
+            Feb 2025 - May 2025, Bangalore
+            • Conducted software testing and quality assurance on live projects, ensuring optimal performance.
+            • Gained expertise in test case creation, Requirements Traceability Matrix (RTM), Script execution, and bug tracking to improve software reliability.
+            • Worked with automation tools and frameworks, enhancing efficiency in testing processes.
+
+            Projects
+            Next-Gen Interview Simulator with Facial Tracking and Answer Insights
+            It is a platform to enhance interview preparation through personalized simulations and real-time feedback.
+            • Integrated NLP and video transcription to provide actionable feedback on verbal and non-verbal communication.
+            • Built a secure and scalable backend to support 100+ concurrent users.
+            • Delivered performance analytics via an interactive dashboard, boosting user engagement and readiness.
+
+            ShoppersStack Website Testing
+            • Tested the e-commerce web application shoppersstack.com during internship at Robowaves Innovations.
+            • Performed functional, regression, compatibility, and exploratory testing across various browsers and devices.
+            • Created and executed detailed test cases, identified defects, and logged them using Jira.
+            • Automated smoke and regression test cases using Selenium and TestNG; validated APIs through Postman and REST Assured.
+
+            Technical Skills
+            • Testing Skills: SDLC, STLC, Smoke testing, Regression Testing, Compatibility Testing, Adhoc Testing, Exploratory Testing, Performance Testing, Test Case Design, Test Data Management, Test Execution, Defect Lifecycle
+            • Defect Tracking Tools: Jira, Test Rail, Quality Center, Defect Reporting
+            • SQL Skills: SQL Queries, Joins, Subqueries, DDL, DML, DQL, TCL, DCL, Normalization
+            • Java Skills: OOPs, Inheritance, Polymorphism, Abstraction, Encapsulation, Collections, Exception Handling, Overloading, Overriding
+            • Selenium Skills: Selenium, XPath, Locators, Select Class, Actions Class, Frames, Pop-ups, TestNG, Page Object Model (POM)
+            • Developer Tools: VS Code, Eclipse, FireFlink, Figma, Adobe XD, GitHub
+            • Soft Skills: Communication, Collaboration, Problem-Solving, Leadership
+        `;
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Intersection Observer for fade-in sections
+        const fadeInSections = document.querySelectorAll('.fade-in-section');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Stop observing once visible
+                }
+            });
+        }, observerOptions);
+
+        fadeInSections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Typing animation for name
+        const nameElement = document.getElementById('name-typing');
+        const nameText = "Sagar Chintamani";
+        let i = 0;
+
+        function typeWriter() {
+            if (i < nameText.length) {
+                nameElement.innerHTML += nameText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100); // Adjust typing speed here
+            }
+        }
+
+        // Start typing animation when the page loads
+        window.addEventListener('load', () => {
+            typeWriter();
+        });
+
+        // Scroll to top button functionality
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollToTopBtn.style.display = "block";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        };
+
+        scrollToTopBtn.addEventListener("click", function() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+
+        // Download Resume Button Animation
+        const downloadResumeBtn = document.getElementById('downloadResumeBtn');
+        if (downloadResumeBtn) {
+            downloadResumeBtn.addEventListener('click', function() {
+                this.classList.add('download-animation');
+                // Remove the animation class after it completes
+                setTimeout(() => {
+                    this.classList.remove('download-animation');
+                }, 500); // Matches the animation duration
+            });
+        }
+
+        // Gemini API Integration for AI Assistant
+        const askAiBtn = document.getElementById('askAiBtn');
+        const aiQuestionInput = document.getElementById('aiQuestion');
+        const aiResponseDiv = document.getElementById('aiResponse');
+        const aiResponseText = document.getElementById('aiResponseText');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const buttonText = document.getElementById('buttonText');
+
+        askAiBtn.addEventListener('click', async () => {
+            const userQuestion = aiQuestionInput.value.trim();
+            if (!userQuestion) {
+                aiResponseText.textContent = "Please enter a question.";
+                aiResponseDiv.classList.remove('hidden');
+                return;
+            }
+
+            // Show loading state
+            buttonText.textContent = 'Asking...';
+            loadingSpinner.classList.remove('hidden');
+            askAiBtn.disabled = true;
+            aiResponseDiv.classList.add('hidden'); // Hide previous response
+
+            try {
+                let chatHistory = [];
+                const prompt = `Based on the following resume content, answer the question. If the information is not in the resume, state that you cannot answer based on the provided data.
+
+Resume Content:
+${resumeContent}
+
+Question: ${userQuestion}`;
+
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = ""; // If you want to use models other than gemini-2.0-flash or imagen-3.0-generate-002, provide an API key here. Otherwise, leave this as-is.
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    aiResponseText.textContent = text;
+                } else {
+                    aiResponseText.textContent = "Sorry, I couldn't get a response from the AI. Please try again.";
+                    console.error("Unexpected API response structure:", result);
+                }
+            } catch (error) {
+                aiResponseText.textContent = "An error occurred while fetching the AI response. Please try again later.";
+                console.error("Error calling Gemini API:", error);
+            } finally {
+                // Reset button state
+                buttonText.textContent = 'Ask AI';
+                loadingSpinner.classList.add('hidden');
+                askAiBtn.disabled = false;
+                aiResponseDiv.classList.remove('hidden'); // Show response area
+            }
+        });
+    </script>
+</body>
+</html>
