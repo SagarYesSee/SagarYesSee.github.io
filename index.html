@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sagar Chintamani - Personal Portfolio</title>
+    <title>Sagar Chintamani - Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
@@ -168,8 +168,8 @@
             margin: 0 auto;
             letter-spacing: .08em; /* Slightly reduced letter spacing for script font */
             animation:
-                typing 3.5s steps(30, end) forwards,
-                blink-caret .75s step-end infinite;
+                typing 5s steps(30, end) infinite alternate-reverse,
+                blink-caret .85s step-end infinite;
         }
 
         /* The typing effect */
@@ -259,13 +259,13 @@
         <div class="hero-background"></div>
         <div class="z-10 flex flex-col items-center">
             <div class="relative w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden mb-6 border-4 border-yellow-200 shadow-lg animate-fade-in-down">
-                <img src="C:\Users\sagar\OneDrive\Desktop\ahwa.png" onerror="this.src='https://placehold.co/400x400/FFDAB9/1A1A1A?text=Sagar';" alt="Sagar Chintamani Profile" class="w-full h-full object-contain">
+                <img src="https://drive.google.com/file/d/1t3RBuYMiwAadRWXnYYAS66k-bahA4yuN/view?usp=sharing" onerror="this.src='https://placehold.co/400x400/FFDAB9/1A1A1A?text=Sagar';" alt="Sagar Chintamani Profile" class="w-full h-full object-contain">
             </div>
             <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-4">
                 Hi, I'm <span class="text-yellow-200 typing-animation" id="name-typing"></span>
             </h1>
             <p class="text-xl md:text-2xl text-gray-300 mb-8 animate-fade-in-up delay-200">
-                A passionate Computer Science professional with a focus on Quality Assurance and Technical Content.
+                A passionate Computer Science professional with a focus on Quality Assurance and Software Development.
             </p>
             <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 animate-fade-in-up delay-400">
                 <a href="#projects" id="viewWorkBtn" class="btn-primary inline-flex items-center">
@@ -661,7 +661,7 @@ Question: ${userQuestion}`;
 
                 chatHistory.push({ role: "user", parts: [{ text: prompt }] });
                 const payload = { contents: chatHistory };
-                const apiKey = ""; // If you want to use models other than gemini-2.0-flash or imagen-3.0-generate-002, provide an API key here. Otherwise, leave this as-is.
+                const apiKey = "AIzaSyDTfvVUA2YJN17tOEZYCqxaym8aiWihosQ"; 
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
                 const response = await fetch(apiUrl, {
