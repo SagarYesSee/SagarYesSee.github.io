@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sagar Chintamani - Portfolio of a QA Engineer and Technical Writer.">
+<meta name="keywords" content="QA, Selenium, Testing, Technical Writer, Java, SQL, Sagar Chintamani">
+<meta name="author" content="Sagar Chintamani">
+
     <title>Sagar Chintamani - Personal Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Didot&family=Libre+Baskerville:wght@400;700&family=Arnauld&display=swap" rel="stylesheet">
@@ -285,7 +289,7 @@
                 Hi, I'm <span class="text-yellow-200 typing-animation" id="name-typing"></span>
             </h1>
             <p class="text-xl md:text-2xl text-gray-300 mb-8 animate-fade-in-up delay-200">
-                A passionate Computer Science professional with a focus on Quality Assurance and Technical Content.
+                A passionate Computer Science professional with a focus on Quality Assurance and Software Development.
             </p>
             <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 animate-fade-in-up delay-400">
                 <a href="#projects" id="viewWorkBtn" class="btn-primary inline-flex items-center">
@@ -606,12 +610,17 @@
         let i = 0;
 
         function typeWriter() {
-            if (i < nameText.length) {
-                nameElement.innerHTML += nameText.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100); // Adjust typing speed here
-            }
+    nameElement.innerHTML = "";
+    i = 0;
+    (function type() {
+        if (i < nameText.length) {
+            nameElement.innerHTML += nameText.charAt(i);
+            i++;
+            setTimeout(type, 100);
         }
+    })();
+}
+
 
         // Start typing animation when the page loads
         window.addEventListener('load', () => {
