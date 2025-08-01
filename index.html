@@ -3,46 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sagar Chintamani - Portfolio</title>
+    <title>Sagar Chintamani - Personal Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Didot&family=Libre+Baskerville:wght@400;700&family=Arnauld&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Custom color variables for a softer, multi-shade palette */
-            --color-primary-start: #FFA07A; /* Light Salmon */
-            --color-primary-end: #FFDAB9;   /* Peach Puff */
-            --color-secondary-start: #87CEEB; /* Sky Blue */
-            --color-secondary-end: #ADD8E6;   /* Light Blue */
+            /* Custom color variables for a violet-pink gradient theme */
+            --color-primary-start: #8E2DE2; /* Violet */
+            --color-primary-end: #4A00E0;   /* Dark Violet */
+            --color-secondary-start: #FF0077; /* Pink */
+            --color-secondary-end: #CC0066;   /* Dark Pink */
             --color-accent-text: #FFDAB9; /* Peach Puff for main accents */
-            --color-hover-text: #FFA07A; /* Light Salmon on hover */
-            --color-dark-bg: #1A1A1A; /* Slightly lighter dark background */
-            --color-card-bg: rgba(30, 30, 30, 0.8); /* Semi-transparent dark card background */
-            --color-card-hover-bg: rgba(40, 40, 40, 0.9); /* Slightly less transparent on hover */
+            --color-hover-text: #FF66B2; /* Lighter Pink on hover */
+            --color-dark-bg: #0A0A1A; /* Very dark blue-violet background */
+            --color-card-bg: rgba(18, 18, 30, 0.8); /* Semi-transparent dark card background */
+            --color-card-hover-bg: rgba(25, 25, 40, 0.9); /* Slightly less transparent on hover */
         }
 
         body {
-            font-family: 'Inter', sans-serif; /* Default font for body */
+            font-family: 'Libre Baskerville', serif; /* Elegant serif font for body */
             background-color: var(--color-dark-bg);
             color: #e0e0e0; /* Lighter text */
             line-height: 1.6;
             overflow-x: hidden; /* Prevent horizontal scroll */
             padding-top: 6rem; /* Add padding to the top of the body to clear the fixed nav */
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%238E2DE2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mouse-pointer-2"><path d="m4 4 7.07 17 2.51-7.39L21 11.07z"/><path d="m13.04 13.04 7.07 7.07"/></svg>') 12 12, pointer;
         }
         @media (min-width: 768px) { /* Adjust for larger screens if nav height changes */
             body {
                 padding-top: 5rem; /* Slightly less padding on desktop if nav is shorter */
             }
         }
+        a, button, .icon-link, .card:hover {
+            cursor: pointer;
+        }
 
         h1, h2, h3 {
-            font-family: 'Poppins', sans-serif; /* Stylish font for headings */
+            font-family: 'Didot', 'Times New Roman', serif; /* Elegant, classic serif font for headings */
         }
         /* Specific font for the name in hero section */
         #name-typing {
-            font-family: 'Great Vibes', cursive;
+            font-family: 'Arnauld', cursive; /* Distinct, stylish cursive font */
             font-size: 1.2em; /* Adjust relative to h1 */
-            font-weight: 400; /* Great Vibes is typically light */
+            font-weight: 400;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            /* New animation for name typing */
+            animation: typing 5s steps(28, end) infinite, blink-caret .75s step-end infinite;
+        }
+
+        /* Adjusted typing animation for a slower, looping effect */
+        @keyframes typing {
+            0% { width: 0 }
+            50% { width: 100% }
+            100% { width: 0 }
+        }
+
+        /* The typewriter caret effect */
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--color-primary-start); }
         }
 
         .section-heading {
@@ -51,8 +70,12 @@
             margin-bottom: 2.5rem;
             font-size: 2.8rem;
             font-weight: 700;
-            color: var(--color-accent-text);
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, #8E2DE2, #FF0077); /* Violet to Pink gradient for heading text */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback */
+            text-shadow: none; /* Remove previous shadow */
         }
         .section-heading::after {
             content: '';
@@ -79,8 +102,8 @@
             background-color: var(--color-card-hover-bg);
         }
         .btn-primary {
-            background: linear-gradient(to right, var(--color-primary-start), var(--color-primary-end));
-            color: var(--color-dark-bg); /* Dark text on button */
+            background: linear-gradient(to right, var(--color-primary-start), var(--color-secondary-start));
+            color: #FFFFFF; /* White text on button */
             padding: 1rem 2rem;
             border-radius: 0.75rem;
             font-weight: 700;
@@ -91,7 +114,7 @@
             justify-content: center;
         }
         .btn-primary:hover {
-            background: linear-gradient(to right, var(--color-primary-end), var(--color-primary-start)); /* Reverse gradient on hover */
+            background: linear-gradient(to right, var(--color-secondary-start), var(--color-primary-start)); /* Reverse gradient on hover */
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
         }
@@ -125,16 +148,18 @@
             height: 100%;
             overflow: hidden;
             z-index: -1;
-            opacity: 0.25; /* Slightly more visible for the softer colors */
+            opacity: 0.3; /* Slightly more visible for the softer colors */
         }
         .hero-background::before,
-        .hero-background::after {
+        .hero-background::after,
+        .hero-background-third {
             content: '';
             position: absolute;
-            background: var(--color-primary-start);
+            background: #FF0077; /* Pink */
             border-radius: 50%;
-            animation: move-bg 25s infinite alternate ease-in-out;
-            filter: blur(100px);
+            animation: move-bg 30s infinite alternate ease-in-out;
+            filter: blur(120px); /* More blur for a softer floating effect */
+            opacity: 0.8;
         }
         .hero-background::before {
             width: 350px;
@@ -142,14 +167,23 @@
             top: -80px;
             left: -80px;
             animation-delay: 0s;
+            background: #8E2DE2; /* Violet */
         }
         .hero-background::after {
             width: 450px;
             height: 450px;
             bottom: -120px;
             right: -120px;
-            background: var(--color-secondary-start);
-            animation-delay: 7s;
+            background: #FF0077; /* Pink */
+            animation-delay: 10s;
+        }
+        .hero-background-third {
+            width: 400px;
+            height: 400px;
+            top: 50%;
+            left: 20%;
+            background: #4A00E0; /* Dark Violet */
+            animation-delay: 20s;
         }
 
         @keyframes move-bg {
@@ -160,28 +194,14 @@
             100% { transform: translate(0, 0) scale(1); }
         }
 
-        /* Typing animation for name */
-        .typing-animation {
-            overflow: hidden;
-            border-right: .15em solid var(--color-primary-start); /* Caret color */
-            white-space: nowrap;
-            margin: 0 auto;
-            letter-spacing: .08em; /* Slightly reduced letter spacing for script font */
-            animation:
-                typing 5s steps(30, end) infinite alternate-reverse,
-                blink-caret .85s step-end infinite;
+        /* Floating photo animation */
+        .photo-animation {
+            animation: float 4s ease-in-out infinite;
         }
-
-        /* The typing effect */
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-
-        /* The typewriter caret effect */
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: var(--color-primary-start); }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
 
         /* Scroll-to-top button */
@@ -190,8 +210,8 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: linear-gradient(to right, var(--color-primary-start), var(--color-primary-end));
-            color: var(--color-dark-bg);
+            background: linear-gradient(to right, var(--color-primary-start), var(--color-secondary-start));
+            color: #FFFFFF;
             border: none;
             border-radius: 50%;
             width: 55px;
@@ -204,7 +224,7 @@
         }
 
         #scrollToTopBtn:hover {
-            background: linear-gradient(to right, var(--color-primary-end), var(--color-primary-start));
+            background: linear-gradient(to right, var(--color-secondary-start), var(--color-primary-start));
             transform: translateY(-3px);
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
         }
@@ -258,14 +278,14 @@
     <section id="hero" class="relative h-screen flex items-center justify-center text-center mt-0 pt-0 overflow-hidden">
         <div class="hero-background"></div>
         <div class="z-10 flex flex-col items-center">
-            <div class="relative w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden mb-6 border-4 border-yellow-200 shadow-lg animate-fade-in-down">
-                <img src="https://drive.google.com/file/d/1t3RBuYMiwAadRWXnYYAS66k-bahA4yuN/view?usp=sharing" onerror="this.src='https://placehold.co/400x400/FFDAB9/1A1A1A?text=Sagar';" alt="Sagar Chintamani Profile" class="w-full h-full object-contain">
+            <div class="relative w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden mb-6 border-4 border-yellow-200 shadow-lg animate-fade-in-down photo-animation">
+                <img src="./ahwa.png" onerror="this.src='https://placehold.co/400x400/FFDAB9/1A1A1A?text=Sagar';" alt="Sagar Chintamani Profile" class="w-full h-full object-contain">
             </div>
             <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-4">
                 Hi, I'm <span class="text-yellow-200 typing-animation" id="name-typing"></span>
             </h1>
             <p class="text-xl md:text-2xl text-gray-300 mb-8 animate-fade-in-up delay-200">
-                A passionate Computer Science professional with a focus on Quality Assurance and Software Development.
+                A passionate Computer Science professional with a focus on Quality Assurance and Technical Content.
             </p>
             <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 animate-fade-in-up delay-400">
                 <a href="#projects" id="viewWorkBtn" class="btn-primary inline-flex items-center">
@@ -458,7 +478,7 @@
 
         <!-- Contact Section -->
         <section id="contact" class="py-16 fade-in-section text-center">
-            <h2 class="section-heading mx-auto">Contact Me</h2>
+            <h2 class="section-heading">Contact Me</h2>
             <div class="card max-w-2xl mx-auto">
                 <p class="text-lg mb-6">
                     Feel free to reach out to me for collaborations, opportunities, or just to say hello!
