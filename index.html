@@ -4,38 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Sagar Chintamani - Portfolio of a QA Engineer and Technical Writer.">
-<meta name="keywords" content="QA, Selenium, Testing, Technical Writer, Java, SQL, Sagar Chintamani">
-<meta name="author" content="Sagar Chintamani">
+    <meta name="keywords" content="QA, Selenium, Testing, Technical Writer, Java, SQL, Sagar Chintamani">
+    <meta name="author" content="Sagar Chintamani">
 
     <title>Sagar Chintamani - Personal Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Didot&family=Libre+Baskerville:wght@400;700&family=Arnauld&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Custom color variables for a violet-pink gradient theme */
-            --color-primary-start: #8E2DE2; /* Violet */
-            --color-primary-end: #4A00E0;   /* Dark Violet */
-            --color-secondary-start: #FF0077; /* Pink */
-            --color-secondary-end: #CC0066;   /* Dark Pink */
-            --color-accent-text: #FFDAB9; /* Peach Puff for main accents */
-            --color-hover-text: #FF66B2; /* Lighter Pink on hover */
-            --color-dark-bg: #0A0A1A; /* Very dark blue-violet background */
-            --color-card-bg: rgba(18, 18, 30, 0.8); /* Semi-transparent dark card background */
-            --color-card-hover-bg: rgba(25, 25, 40, 0.9); /* Slightly less transparent on hover */
+            /* Updated custom color variables for a clean, glassmorphic theme */
+            --color-primary-start: #A78BFA; /* Light Purple */
+            --color-primary-end: #8B5CF6;   /* Medium Purple */
+            --color-secondary-start: #F0ABFC; /* Light Pink */
+            --color-secondary-end: #D8B4FE; /* Medium Pink/Lavender */
+            --color-accent-text: #FDE68A; /* Yellow-Gold for main accents */
+            --color-hover-text: #A7F3D0;   /* Light Teal on hover */
+            --color-dark-bg: #111827; /* Single, solid dark blue background */
+            --color-card-bg: rgba(255, 255, 255, 0.1); /* Semi-transparent white for glass effect */
+            --color-card-hover-bg: rgba(255, 255, 255, 0.2); /* Slightly less transparent on hover */
+            --color-glass-border: rgba(255, 255, 255, 0.25); /* Subtle white border for glass */
         }
+          [target-section] {
+  scroll-margin-top: 80px; /* Adjust based on header height */
+}
 
         body {
-            font-family: 'Libre Baskerville', serif; /* Elegant serif font for body */
-            background-color: var(--color-dark-bg);
-            color: #e0e0e0; /* Lighter text */
+            font-family: 'Libre Baskerville', serif;
+            background: #0f0c29;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+            color: #e0e0e0;
             line-height: 1.6;
-            overflow-x: hidden; /* Prevent horizontal scroll */
-            padding-top: 6rem; /* Add padding to the top of the body to clear the fixed nav */
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%238E2DE2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mouse-pointer-2"><path d="m4 4 7.07 17 2.51-7.39L21 11.07z"/><path d="m13.04 13.04 7.07 7.07"/></svg>') 12 12, pointer;
+            overflow-x: hidden;
+            padding-top: 6rem;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23A78BFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mouse-pointer-2"><path d="m4 4 7.07 17 2.51-7.39L21 11.07z"/><path d="m13.04 13.04 7.07 7.07"/></svg>') 12 12, pointer;
         }
-        @media (min-width: 768px) { /* Adjust for larger screens if nav height changes */
+        /* Hide the native cursor */
+/* Hide the default cursor */
+* {
+  cursor: none;
+}
+
+#custom-cursor {
+  position: fixed;
+  width: 16px;
+  height: 16px;
+  background: black;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+/* Trail effect */
+.cursor-trail {
+  position: fixed;
+  width: 40px; /* Wide glow */
+  height: 60px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: conic-gradient(
+    from 0deg,
+    red,
+    orange,
+    yellow,
+    lime,
+    cyan,
+    blue,
+    violet,
+    red
+  );
+  opacity: 0.4;
+  filter: blur(25px); /* Smooth glow */
+  transform: translate(-50%, -50%);
+  animation: fadeTrail 1.5s ease-out forwards;
+  z-index: 9998;
+}
+
+@keyframes fadeTrail {
+  0% {
+    opacity: 0.4;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.8);
+  }
+}
+.gold-glow {
+    position: relative;
+    display: inline-block;
+    border-radius: 50%; /* Slight rounding — optional */
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.7), 
+                0 0 40px rgba(255, 215, 0, 0.5),
+                0 0 60px rgba(255, 215, 0, 0.3);
+    animation: glowPulse 2s infinite alternate;
+}
+
+@keyframes glowPulse {
+    0% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4); }
+    100% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.8), 0 0 50px rgba(255, 215, 0, 0.6); }
+}
+
+
+        @media (min-width: 768px) {
             body {
-                padding-top: 5rem; /* Slightly less padding on desktop if nav is shorter */
+                padding-top: 5rem; /* Adjusted for desktop */
             }
         }
         a, button, .icon-link, .card:hover {
@@ -43,27 +118,23 @@
         }
 
         h1, h2, h3 {
-            font-family: 'Didot', 'Times New Roman', serif; /* Elegant, classic serif font for headings */
+            font-family: 'Didot', 'Times New Roman', serif;
         }
-        /* Specific font for the name in hero section */
         #name-typing {
-            font-family: 'Arnauld', cursive; /* Distinct, stylish cursive font */
-            font-size: 1.2em; /* Adjust relative to h1 */
+            font-family: 'Arnauld', cursive;
+            font-size: 1.2em;
             font-weight: 400;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-            /* New animation for name typing */
             animation: typing 5s steps(30, end) infinite alternate-reverse,
                 blink-caret .85s step-end infinite;
         }
 
-        /* Adjusted typing animation for a slower, looping effect */
         @keyframes typing {
             0% { width: 0 }
             50% { width: 100% }
             100% { width: 0 }
         }
 
-        /* The typewriter caret effect */
         @keyframes blink-caret {
             from, to { border-color: transparent }
             50% { border-color: var(--color-primary-start); }
@@ -75,12 +146,12 @@
             margin-bottom: 2.5rem;
             font-size: 2.8rem;
             font-weight: 700;
-            background: linear-gradient(to right, #8E2DE2, #FF0077); /* Violet to Pink gradient for heading text */
+            background: linear-gradient(to right, var(--color-primary-start), var(--color-secondary-start));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            color: transparent; /* Fallback */
-            text-shadow: none; /* Remove previous shadow */
+            color: transparent;
+            text-shadow: none;
         }
         .section-heading::after {
             content: '';
@@ -96,30 +167,40 @@
             background-color: var(--color-card-bg);
             border-radius: 1.5rem;
             padding: 2.5rem;
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(8px);
-            transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out, background-color 0.4s ease-in-out;
-            border: 1px solid rgba(255, 255, 255, 0.08); /* Subtle border */
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out, background-color 0.4s ease-in-out, border 0.4s ease-in-out;
+            border: 1px solid var(--color-glass-border);
         }
         .card:hover {
             transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.3);
             background-color: var(--color-card-hover-bg);
+            border: 1px solid var(--color-secondary-start);
+        }
+        .nav-card {
+            background-color: var(--color-card-bg);
+            border-radius: 1.5rem;
+            padding: 1rem 2.5rem; /* Adjusted padding */
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--color-glass-border);
+            transition: box-shadow 0.4s ease-in-out;
         }
         .btn-primary {
             background: linear-gradient(to right, var(--color-primary-start), var(--color-secondary-start));
-            color: #FFFFFF; /* White text on button */
+            color: #FFFFFF;
             padding: 1rem 2rem;
             border-radius: 0.75rem;
             font-weight: 700;
             transition: all 0.3s ease-in-out;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            display: flex; /* Use flexbox for icon and text alignment */
+            display: flex;
             align-items: center;
             justify-content: center;
         }
         .btn-primary:hover {
-            background: linear-gradient(to right, var(--color-secondary-start), var(--color-primary-start)); /* Reverse gradient on hover */
+            background: linear-gradient(to right, var(--color-secondary-start), var(--color-primary-start));
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
         }
@@ -132,8 +213,7 @@
             transform: translateY(-5px) rotate(5deg);
             color: var(--color-hover-text);
         }
-
-        /* Animation for section fade-in */
+        
         .fade-in-section {
             opacity: 0;
             transform: translateY(30px);
@@ -144,62 +224,13 @@
             transform: translateY(0);
         }
 
-        /* Hero section background animation */
+        /* All background animations and shapes are removed */
         .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
-            opacity: 0.3; /* Slightly more visible for the softer colors */
+            display: none;
         }
-        .hero-background::before,
-        .hero-background::after,
-        .hero-background-third {
-            content: '';
-            position: absolute;
-            background: #FF0077; /* Pink */
-            border-radius: 50%;
-            animation: move-bg 30s infinite alternate ease-in-out;
-            filter: blur(120px); /* More blur for a softer floating effect */
-            opacity: 0.8;
+        .section-background {
+            display: none;
         }
-        .hero-background::before {
-            width: 350px;
-            height: 350px;
-            top: -80px;
-            left: -80px;
-            animation-delay: 0s;
-            background: #8E2DE2; /* Violet */
-        }
-        .hero-background::after {
-            width: 450px;
-            height: 450px;
-            bottom: -120px;
-            right: -120px;
-            background: #FF0077; /* Pink */
-            animation-delay: 10s;
-        }
-        .hero-background-third {
-            width: 400px;
-            height: 400px;
-            top: 50%;
-            left: 20%;
-            background: #4A00E0; /* Dark Violet */
-            animation-delay: 20s;
-        }
-
-        @keyframes move-bg {
-            0% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(70px, 70px) scale(1.15); }
-            50% { transform: translate(-50px, 120px) scale(0.95); }
-            75% { transform: translate(80px, -30px) scale(1.2); }
-            100% { transform: translate(0, 0) scale(1); }
-        }
-
-        /* Floating photo animation */
         .photo-animation {
             animation: float 4s ease-in-out infinite;
         }
@@ -209,32 +240,48 @@
             100% { transform: translateY(0px); }
         }
 
-        /* Scroll-to-top button */
+        /* New styles for the scroll-to-top progress button */
         #scrollToTopBtn {
             display: none;
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: linear-gradient(to right, var(--color-primary-start), var(--color-secondary-start));
-            color: #FFFFFF;
-            border: none;
-            border-radius: 50%;
-            width: 55px;
-            height: 55px;
-            font-size: 1.8rem;
+            width: 60px;
+            height: 60px;
             cursor: pointer;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
             z-index: 1000;
+            transition: opacity 0.3s ease;
+        }
+        #scrollToTopBtn svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+        #scrollToTopBtn .track {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.15);
+            stroke-width: 5;
+        }
+        #scrollToTopBtn .progress {
+            fill: none;
+            stroke: var(--color-secondary-start);
+            stroke-width: 5;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.3s ease;
+        }
+        #scrollToTopBtn .arrow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--color-accent-text);
+            font-size: 24px;
+            font-weight: bold;
+        }
+        #scrollToTopBtn:hover .progress {
+            stroke: var(--color-primary-start);
         }
 
-        #scrollToTopBtn:hover {
-            background: linear-gradient(to right, var(--color-secondary-start), var(--color-primary-start));
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
-        }
-
-        /* Loading spinner */
         .spinner {
             border: 4px solid rgba(255, 255, 255, 0.3);
             border-top: 4px solid var(--color-primary-start);
@@ -249,7 +296,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Download button animation */
         .download-animation {
             animation: download-pulse 0.5s ease-out;
         }
@@ -262,12 +308,12 @@
     </style>
 </head>
 <body class="bg-gray-950 text-gray-100">
-
+    <div id="custom-cursor"></div>
     <!-- Navigation Bar -->
-    <nav class="bg-gray-800 p-4 fixed top-0 left-0 w-full z-50 shadow-lg rounded-b-xl px-6 py-3">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
-            <a href="#" class="text-3xl font-extrabold text-white hover:text-yellow-200 transition-colors duration-300 mb-2 md:mb-0">Sagar Chintamani</a>
-            <div class="flex flex-wrap justify-center md:space-x-6 space-x-3">
+    <nav class="nav-card fixed top-[0.7cm] left-0 transform -translate-x-0 w-full z-50">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center px-4">
+            <a href="#" class="text-3xl font-extrabold text-white hover:text-yellow-200 transition-colors duration-300 mb-4 md:mb-0">Sagar Chintamani</a>
+            <div class="flex flex-wrap justify-center md:space-x-4 space-x-2 text-sm md:text-base">
                 <a href="#about" class="text-gray-300 hover:text-yellow-200 transition-colors duration-300 font-medium">About</a>
                 <a href="#education" class="text-gray-300 hover:text-yellow-200 transition-colors duration-300 font-medium">Education</a>
                 <a href="#experience" class="text-gray-300 hover:text-yellow-200 transition-colors duration-300 font-medium">Experience</a>
@@ -281,11 +327,11 @@
 
     <!-- Hero Section -->
     <section id="hero" class="relative h-screen flex items-center justify-center text-center mt-0 pt-0 overflow-hidden">
-        <div class="hero-background"></div>
         <div class="z-10 flex flex-col items-center">
-            <div class="relative w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden mb-6 border-4 border-yellow-200 shadow-lg animate-fade-in-down photo-animation">
-                <img src="./ahwa.png" onerror="this.src='https://placehold.co/400x400/FFDAB9/1A1A1A?text=Sagar';" alt="Sagar Chintamani Profile" class="w-full h-full object-contain">
-            </div>
+            <div class="relative w-40 h-40 md:w-48 md:h-48 mb-6 photo-animation gold-glow">
+    <img src="ahwa.png" alt="Sagar_Chintamani" class="w-full h-full object-cover">
+</div>
+
             <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-4">
                 Hi, I'm <span class="text-yellow-200 typing-animation" id="name-typing"></span>
             </h1>
@@ -297,7 +343,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-open mr-2"><path d="M6 14V4a2 2 0 0 1 2-2h4l2 2h4a2 2 0 0 1 2 2v7.5"/><path d="M2 8v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/></svg>
                     View My Work
                 </a>
-                <a href="https://drive.google.com/file/d/1BSAbZeV59jyUmXqBrCxN29TLkuwfrKZD/view?usp=drive_link" download="Sagar_Chintamani_Resume.pdf" id="downloadResumeBtn" class="btn-primary inline-flex items-center bg-gray-700 hover:bg-gray-600 text-white">
+                <a href="https://drive.google.com/file/d/1CDioH8YBwODsGhB3qT-bvTS6VLGmYcEQ/view?usp=sharing" download="Sagar_Chintamani_Resume.pdf" id="downloadResumeBtn" class="btn-primary inline-flex items-center bg-gray-700 hover:bg-gray-600 text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download mr-2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
                     Download Resume
                 </a>
@@ -308,7 +354,7 @@
     <main class="container mx-auto py-16 px-4">
 
         <!-- About Me Section -->
-        <section id="about" class="py-16 fade-in-section">
+        <section id="about" class="py-16 fade-in-section relative">
             <h2 class="section-heading">About Me</h2>
             <div class="card">
                 <p class="text-lg mb-4">
@@ -325,7 +371,7 @@
         </section>
 
         <!-- Education Section -->
-        <section id="education" class="py-16 fade-in-section">
+        <section id="education" class="py-16 fade-in-section relative">
             <h2 class="section-heading">Education</h2>
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="card">
@@ -344,7 +390,7 @@
         </section>
 
         <!-- Experience Section -->
-        <section id="experience" class="py-16 fade-in-section">
+        <section id="experience" class="py-16 fade-in-section relative">
             <h2 class="section-heading">Experience</h2>
             <div class="grid gap-8">
                 <div class="card">
@@ -371,7 +417,7 @@
         </section>
 
         <!-- Projects Section -->
-        <section id="projects" class="py-16 fade-in-section">
+        <section id="projects" class="py-16 fade-in-section relative">
             <h2 class="section-heading">Projects</h2>
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="card">
@@ -396,7 +442,7 @@
         </section>
 
         <!-- Technical Skills Section -->
-        <section id="skills" class="py-16 fade-in-section">
+        <section id="skills" class="py-16 fade-in-section relative">
             <h2 class="section-heading">Technical Skills</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="card">
@@ -460,9 +506,9 @@
         </section>
 
         <!-- AI Assistant Section -->
-        <section id="ai-assistant" class="py-16 fade-in-section">
+        <section id="ai-assistant" class="py-16 fade-in-section relative">
             <h2 class="section-heading">Ask Sagar ✨ (AI Assistant)</h2>
-            <div class="card max-w-2xl mx-auto">
+            <div class="card w-full mx-auto">
                 <p class="text-lg mb-4">
                     Have a question about my skills, experience, or projects? Ask my AI assistant!
                     It will answer based on the information provided in my resume.
@@ -482,7 +528,7 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="py-16 fade-in-section text-center">
+        <section id="contact" class="py-16 fade-in-section text-center relative pb-0">
             <h2 class="section-heading">Contact Me</h2>
             <div class="card max-w-2xl mx-auto">
                 <p class="text-lg mb-6">
@@ -510,14 +556,75 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 p-6 text-center text-gray-400 rounded-t-xl">
+    <footer class="bg-gray-800 p-6 text-center text-gray-400">
         <p>&copy; 2025 Sagar Chintamani. All rights reserved.</p>
     </footer>
 
-    <!-- Scroll to Top Button -->
-    <button id="scrollToTopBtn" title="Go to top">↑</button>
+    <!-- Scroll to Top Button (Progress Indicator) -->
+    <a id="scrollToTopBtn" href="#hero">
+        <svg viewBox="0 0 100 100">
+            <circle class="track" cx="50" cy="50" r="45"></circle>
+            <circle class="progress" cx="50" cy="50" r="45"></circle>
+        </svg>
+        <div class="arrow">↑</div>
+    </a>
 
     <script>
+
+const cursor = document.getElementById("custom-cursor");
+
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
+let currentX = mouseX;
+let currentY = mouseY;
+const ease = 0.15;
+
+document.addEventListener("mousemove", (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  cursor.style.left = `${mouseX}px`;
+  cursor.style.top = `${mouseY}px`;
+
+  // Create a trail
+  const trail = document.createElement("div");
+  trail.className = "cursor-trail";
+  trail.style.left = `${mouseX}px`;
+  trail.style.top = `${mouseY}px`;
+  document.body.appendChild(trail);
+
+  // Remove trail after animation ends
+  setTimeout(() => {
+    trail.remove();
+  }, 1500);
+});
+
+function animate() {
+  currentX += (mouseX - currentX) * ease;
+  currentY += (mouseY - currentY) * ease;
+  cursor.style.left = `${currentX}px`;
+  cursor.style.top = `${currentY}px`;
+  requestAnimationFrame(animate);
+}
+animate();
+
+
+
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+
+
+
+
         // Resume content for AI assistant
         const resumeContent = `
             SAGAR CHINTAMANI
@@ -596,7 +703,6 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target); // Stop observing once visible
                 }
             });
         }, observerOptions);
@@ -611,35 +717,49 @@
         let i = 0;
 
         function typeWriter() {
-    nameElement.innerHTML = "";
-    i = 0;
-    (function type() {
-        if (i < nameText.length) {
-            nameElement.innerHTML += nameText.charAt(i);
-            i++;
-            setTimeout(type, 100);
+            nameElement.innerHTML = "";
+            i = 0;
+            (function type() {
+                if (i < nameText.length) {
+                    nameElement.innerHTML += nameText.charAt(i);
+                    i++;
+                    setTimeout(type, 100);
+                }
+            })();
         }
-    })();
-}
-
 
         // Start typing animation when the page loads
         window.addEventListener('load', () => {
             typeWriter();
         });
 
-        // Scroll to top button functionality
+        // Scroll to top button functionality with progress indicator
         const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+        const progressCircle = document.querySelector('#scrollToTopBtn .progress');
+        const radius = progressCircle.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+        progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+        progressCircle.style.strokeDashoffset = circumference;
 
-        window.onscroll = function() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        const updateScrollProgress = () => {
+            const scrollPosition = document.documentElement.scrollTop;
+            const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = scrollPosition / docHeight;
+            const offset = circumference * (1 - progress);
+            progressCircle.style.strokeDashoffset = offset;
+
+            if (scrollPosition > 100) {
                 scrollToTopBtn.style.display = "block";
             } else {
                 scrollToTopBtn.style.display = "none";
             }
         };
 
-        scrollToTopBtn.addEventListener("click", function() {
+        window.addEventListener('scroll', updateScrollProgress);
+        window.addEventListener('load', updateScrollProgress);
+
+        scrollToTopBtn.addEventListener("click", function(e) {
+            e.preventDefault(); // Prevent default anchor link behavior
             window.scrollTo({
                 top: 0,
                 behavior: "smooth"
@@ -651,10 +771,9 @@
         if (downloadResumeBtn) {
             downloadResumeBtn.addEventListener('click', function() {
                 this.classList.add('download-animation');
-                // Remove the animation class after it completes
                 setTimeout(() => {
                     this.classList.remove('download-animation');
-                }, 500); // Matches the animation duration
+                }, 500);
             });
         }
 
@@ -674,11 +793,10 @@
                 return;
             }
 
-            // Show loading state
             buttonText.textContent = 'Asking...';
             loadingSpinner.classList.remove('hidden');
             askAiBtn.disabled = true;
-            aiResponseDiv.classList.add('hidden'); // Hide previous response
+            aiResponseDiv.classList.add('hidden');
 
             try {
                 let chatHistory = [];
@@ -691,8 +809,8 @@ Question: ${userQuestion}`;
 
                 chatHistory.push({ role: "user", parts: [{ text: prompt }] });
                 const payload = { contents: chatHistory };
-                const apiKey = "AIzaSyDTfvVUA2YJN17tOEZYCqxaym8aiWihosQ"; 
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                const apiKey = "AIzaSyDTfvVUA2YJN17tOEZYCqxaym8aiWihosQ"
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
                 const response = await fetch(apiUrl, {
                     method: 'POST',
@@ -715,11 +833,10 @@ Question: ${userQuestion}`;
                 aiResponseText.textContent = "An error occurred while fetching the AI response. Please try again later.";
                 console.error("Error calling Gemini API:", error);
             } finally {
-                // Reset button state
                 buttonText.textContent = 'Ask AI';
                 loadingSpinner.classList.add('hidden');
                 askAiBtn.disabled = false;
-                aiResponseDiv.classList.remove('hidden'); // Show response area
+                aiResponseDiv.classList.remove('hidden');
             }
         });
     </script>
