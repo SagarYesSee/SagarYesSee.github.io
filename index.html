@@ -4,8 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Sagar Chintamani - Portfolio of a QA Engineer and Technical Writer.">
-    <meta name="keywords" content="QA, Selenium, Testing, Technical Writer, Java, SQL, Sagar Chintamani">
+    <meta name="keywords" content="QA, Selenium, Testing, Technical Writer, Java, SQL, Sagar Chintamani, sagar, Chintamani">
     <meta name="author" content="Sagar Chintamani">
+    <!-- Place this inside <head> -->
+
+<!-- Standard favicon -->
+<link rel="icon" type="image/png" href="/awha.png">
+
+<!-- Apple Touch Icon -->
+<link rel="apple-touch-icon" href="/awha.png">
+
+<!-- Optional: Theme colors for mobile browsers -->
+<meta name="theme-color" content="#ffffff">
+<meta name="msapplication-TileColor" content="#ffffff">
 
     <title>Sagar Chintamani - Personal Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -578,33 +589,6 @@ let mouseY = window.innerHeight / 2;
 let currentX = mouseX;
 let currentY = mouseY;
 const ease = 0.15;
-
-const pointer = document.getElementById("custom-cursor");
-let pointerVisible = false;
-
-function showPointer() {
-  if (!pointerVisible) {
-    pointer.style.opacity = "1";
-    pointerVisible = true;
-  }
-}
-
-function movePointer(x, y) {
-  pointer.style.transform = `translate(${x}px, ${y}px)`;
-}
-
-// Desktop mouse
-document.addEventListener("mousemove", e => {
-  showPointer();
-  movePointer(e.clientX, e.clientY);
-});
-
-// Mobile touch
-document.addEventListener("touchmove", e => {
-  showPointer();
-  const touch = e.touches[0];
-  movePointer(touch.clientX, touch.clientY);
-});
 
 document.addEventListener("mousemove", (e) => {
   mouseX = e.clientX;
