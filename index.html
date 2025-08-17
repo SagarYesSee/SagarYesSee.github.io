@@ -56,6 +56,10 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 * {
   cursor: none;
 }
+        a, button {
+  cursor: pointer;
+}
+
 
 #custom-cursor {
   position: fixed;
@@ -65,7 +69,12 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
   border-radius: 50%;
   pointer-events: none;
   transform: translate(-50%, -50%);
+    transition: transform 0.15s ease, background 0.25s ease;
   z-index: 9999;
+}
+a:hover ~ #custom-cursor, .card:hover ~ #custom-cursor {
+  transform: translate(-50%, -50%) scale(1.8);
+  background: rgba(0, 212, 255, 0.2);
 }
 
 /* Trail effect */
